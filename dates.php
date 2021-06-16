@@ -1,4 +1,5 @@
 <?php
+
 //Create headers of the table for cvs
 $dates[0] = array("Months", "Salary payment date", "Bonus payment date");
 
@@ -45,12 +46,14 @@ function bonus_dates_calc($month, $year) {
 
 //Add to an array date for each month consecutively
 for ($month = $current_month; $month < 13; $month++) {
+    //Correct the array numbering
+    $i = ($month - $current_month + 1);
     //Add the first column = the months
-    $dates[$month][] = date('F', strtotime($month."/01/".$current_year));
+    $dates[$i][] = date('F', strtotime($month."/01/".$current_year));
     //Add the second column = the salary payment dates
-    $dates[$month][] = date("d F Y", salary_dates_calc($month, $current_year));
+    $dates[$i][] = date("d F Y", salary_dates_calc($month, $current_year));
     //Add the third column = the bonus payment dates
-    $dates[$month][] = date("d F Y", bonus_dates_calc($month, $current_year));
+    $dates[$i][] = date("d F Y", bonus_dates_calc($month, $current_year));
 }
 
 //Create a new or write to already existing csv file the data
